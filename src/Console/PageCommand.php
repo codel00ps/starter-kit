@@ -29,6 +29,7 @@ class PageCommand extends Command
         $pageFiles = [
             'models/Page.php' => $this->appPath('Models/Page.php'),
             'nova/Page.php' => $this->appPath('Nova/Page.php'),
+            'nova/User.php' => $this->appPath('Nova/User.php'),
             'Policies/PagePolicy.php' => $this->appPath('Policies/PagePolicy.php'),
             'migrations/create_page_table.php' => $this->databasePath('migrations/create_page_table.php'),
         ];
