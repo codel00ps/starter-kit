@@ -23,7 +23,7 @@ Follow these steps in **chronological order**:
 
 #### Step 1: Install the Package
 ```bash
-composer require codeloops/starter-kit:dev-main
+composer require codeloops/starter-kit:dev-master
 ```
 
 > **Note**: Using HTTPS URL for better compatibility. If you prefer SSH and have it configured, you can replace `https://github.com/codel00ps/starter-kit.git` with `git@github.com:codel00ps/starter-kit.git`.
