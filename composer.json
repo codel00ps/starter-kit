@@ -1,0 +1,39 @@
+{
+  "name": "codeloops/starter-kit",
+  "credit": "originally created by itskrayem",
+  "description": "Company Laravel Starter Package",
+  "type": "library",
+  "license": "proprietary",
+  "require": {
+    "php": ">=8.1",
+    "laravel/framework": "^12.0"
+  },
+  "autoload": {
+    "psr-4": {
+  "Codeloops\\StarterKit\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+  "Codeloops\\StarterKit\\StarterKitServiceProvider"
+      ],
+      "stubs": [
+        "stubs/"
+      ]
+    }
+  },
+  "repositories": [
+    {
+      "type": "git",
+  "url": "https://github.com/codel00ps/starter-kit.git"
+    }
+  ],
+  "scripts": {
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
