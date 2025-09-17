@@ -53,25 +53,37 @@ class StarterWizardCommand extends Command
         }
 
         // Install page/blog if selected
+        // $pagesInstalled = false;
+        // $blogInstalled = false;
+        // if (!empty($selected)) {
+        //     if (in_array('page', $selected)) {
+        //         $pageCommand = new \Codeloops\StarterKit\Console\PageCommand();
+        //         $pagesInstalled = $pageCommand->isPagesInstalled();
+        //         if ($pagesInstalled) {
+        //             $this->info('✔ Page features already installed.');
+        //         } else {
+        //             $this->info('📦 Installing page features...');
+        //             $this->call('starter:page');
+        //         }
+        //     }
+        //     if (in_array('blog', $selected)) {
+        //         $this->info('📦 Installing blog features...');
+        //         $this->call('starter:blog');
+        //     }
+        // }
+
+              // Install page if selected
         $pagesInstalled = false;
-        $blogInstalled = false;
-        if (!empty($selected)) {
-            if (in_array('page', $selected)) {
-                $this->info('DEBUG: About to call starter:page');
-                $pageCommand = new \Codeloops\StarterKit\Console\PageCommand();
-                $pagesInstalled = $pageCommand->isPagesInstalled();
-                if ($pagesInstalled) {
-                    $this->info('✔ Page features already installed.');
-                } else {
-                    $this->info('📦 Installing page features...');
-                    $this->call('starter:page');
-                    $this->info('DEBUG: Finished calling starter:page');
-                }
-            }
-            if (in_array('blog', $selected)) {
-                $this->info('DEBUG: About to call starter:blog');
-                $this->call('starter:blog');
-                $this->info('DEBUG: Finished calling starter:blog');
+        if (!empty($selected)) {  // If anything is selected, assume Page was chosen
+            // Check if pages are already installed
+            $pageCommand = new \Codeloops\StarterKit\Console\PageCommand();
+            $pagesInstalled = $pageCommand->isPagesInstalled();
+            
+            if ($pagesInstalled) {
+                $this->info('✔ Page features already installed.');
+            } else {
+                $this->info('📦 Installing page features...');
+                $this->call('starter:page');
             }
         }
 
