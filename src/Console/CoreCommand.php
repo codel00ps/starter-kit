@@ -144,10 +144,10 @@ class CoreCommand extends Command
 
         // Always try to publish the migration after install/discover
         try {
-            $this->runArtisanCommand(['vendor:publish', '--provider=' . self::PROVIDER_MEDIALIBRARY, '--tag=medialibrary-migrations', '--force']);
+            $this->runArtisanCommand(['vendor:publish', '--provider=Spatie\\MediaLibrary\\MediaLibraryServiceProvider', '--tag=medialibrary-migrations', '--force']);
             $this->info("✅ Published MediaLibrary migrations with tag: medialibrary-migrations");
         } catch (\Exception $e) {
-            $this->warn("⚠️ Failed to publish MediaLibrary migrations. You may need to run: php artisan vendor:publish --provider=\"" . self::PROVIDER_MEDIALIBRARY . "\" --tag=medialibrary-migrations --force");
+            $this->warn("⚠️ Failed to publish MediaLibrary migrations. You may need to run: php artisan vendor:publish --provider=\"Spatie\\MediaLibrary\\MediaLibraryServiceProvider\" --tag=\"medialibrary-migrations\" --force");
         }
     }
 
