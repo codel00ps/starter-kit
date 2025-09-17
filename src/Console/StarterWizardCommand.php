@@ -55,10 +55,8 @@ class StarterWizardCommand extends Command
         // Install page/blog if selected
         $pagesInstalled = false;
         $blogInstalled = false;
-        $this->info('Selected options: ' . implode(', ', $selected)); // Debug output
         if (!empty($selected)) {
-            if (in_array('page', $selected)) {
-                $this->info('Page selected, checking installation...'); // Debug
+            if (in_array('Page', $selected)) {
                 $pageCommand = new \Codeloops\StarterKit\Console\PageCommand();
                 $pagesInstalled = $pageCommand->isPagesInstalled();
                 if ($pagesInstalled) {
@@ -67,17 +65,11 @@ class StarterWizardCommand extends Command
                     $this->info('📦 Installing page features...');
                     $this->call('starter:page');
                 }
-            } else {
-                $this->info('Page not selected.'); // Debug
             }
-            if (in_array('blog', $selected)) {
-                $this->info('Blog selected, installing...'); // Debug
+            if (in_array('Blog', $selected)) {
+                $this->info('📦 Installing blog features...');
                 $this->call('starter:blog');
-            } else {
-                $this->info('Blog not selected.'); // Debug
             }
-        } else {
-            $this->info('No optional features selected.'); // Debug
         }
 
         // // Install page if selected
