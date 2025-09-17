@@ -28,6 +28,7 @@ class StarterWizardCommand extends Command
             label: 'Optional features:',
             options: [
                 'Page' => 'page',
+                'Blog' => 'blog',
             ],
             default: [],
             hint: 'Core and Permissions are always installed.'
@@ -51,18 +52,23 @@ class StarterWizardCommand extends Command
             $this->call('starter:permissions');
         }
 
-        // Install page if selected
+        // Install page/blog if selected
         $pagesInstalled = false;
-        if (!empty($selected)) {  // If anything is selected, assume Page was chosen
-            // Check if pages are already installed
-            $pageCommand = new \Codeloops\StarterKit\Console\PageCommand();
-            $pagesInstalled = $pageCommand->isPagesInstalled();
-            
-            if ($pagesInstalled) {
-                $this->info('✔ Page features already installed.');
-            } else {
-                $this->info('📦 Installing page features...');
-                $this->call('starter:page');
+        $blogInstalled = false;
+        if (!empty($selected)) {
+            if (in_array('page', $selected)) {
+                $pageCommand = new \Codeloops\StarterKit\Console\PageCommand();
+                $pagesInstalled = $pageCommand->isPagesInstalled();
+                if ($pagesInstalled) {
+                    $this->info('✔ Page features already installed.');
+                } else {
+                    $this->info('📦 Installing page features...');
+                    $this->call('starter:page');
+                }
+            }
+            if (in_array('blog', $selected)) {
+                $this->info('📦 Installing blog features...');
+                $this->call('starter:blog');
             }
         }
 

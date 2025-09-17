@@ -7,6 +7,7 @@ use Codeloops\StarterKit\Console\CoreCommand;
 use Codeloops\StarterKit\Console\PageCommand;
 use Codeloops\StarterKit\Console\PermissionsCommand;
 use Codeloops\StarterKit\Console\StarterWizardCommand;
+use Codeloops\StarterKit\Console\BlogCommand;
 
 class StarterKitServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,7 @@ class StarterKitServiceProvider extends ServiceProvider
                 PageCommand::class,
                 PermissionsCommand::class,
                 StarterWizardCommand::class,
+                BlogCommand::class,
             ]);
         }
     }

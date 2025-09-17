@@ -112,6 +112,19 @@ class CoreCommand extends Command
             $this->line("✔ Nova TinyMCE Editor already installed.");
         }
 
+        // Publish TinyMCE config if available
+        try {
+            $this->runArtisanCommand([
+                'vendor:publish',
+                '--provider=Murdercode\\TinymceEditor\\TinymceEditorServiceProvider',
+                '--tag=config',
+                '--force'
+            ]);
+            $this->info("✅ Published TinyMCE config file.");
+        } catch (\Exception $e) {
+            $this->warn("⚠️ Failed to publish TinyMCE config. You may need to run: php artisan vendor:publish --provider=\"Murdercode\\TinymceEditor\\TinymceEditorServiceProvider\" --tag=config --force");
+        }
+
         $this->info("✅ Nova TinyMCE Editor setup complete.");
     }
 
