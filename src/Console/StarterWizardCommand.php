@@ -57,6 +57,7 @@ class StarterWizardCommand extends Command
         $blogInstalled = false;
         if (!empty($selected)) {
             if (in_array('page', $selected)) {
+                $this->info('DEBUG: About to call starter:page');
                 $pageCommand = new \Codeloops\StarterKit\Console\PageCommand();
                 $pagesInstalled = $pageCommand->isPagesInstalled();
                 if ($pagesInstalled) {
@@ -64,11 +65,13 @@ class StarterWizardCommand extends Command
                 } else {
                     $this->info('📦 Installing page features...');
                     $this->call('starter:page');
+                    $this->info('DEBUG: Finished calling starter:page');
                 }
             }
             if (in_array('blog', $selected)) {
-                $this->info('📦 Installing blog features...');
+                $this->info('DEBUG: About to call starter:blog');
                 $this->call('starter:blog');
+                $this->info('DEBUG: Finished calling starter:blog');
             }
         }
 

@@ -39,12 +39,26 @@ class BlogCommand extends Command
 
         foreach ($blogFiles as $source => $destination) {
             $sourcePath = __DIR__ . '/../stubs/' . $source;
+            $this->info("DEBUG: Copying from $sourcePath to $destination");
 
             if (file_exists($sourcePath)) {
                 $destinationDir = dirname($destination);
-                File::ensureDirectoryExists($destinationDir);
-                File::copy($sourcePath, $destination);
-                $this->info("✅ Published: {$destination}");
+                try {
+                    File::ensureDirectoryExists($destinationDir);
+                } catch (\Exception $e) {
+                    $this->error("❌ Failed to create directory: {$destinationDir}. Error: {$e->getMessage()}");
+                    continue;
+                }
+
+                try {
+                    if (file_exists($destination)) {
+                        File::delete($destination);
+                    }
+                    File::copy($sourcePath, $destination);
+                    $this->info("✅ Published: {$destination}");
+                } catch (\Exception $e) {
+                    $this->error("❌ Failed to copy {$sourcePath} to {$destination}. Error: {$e->getMessage()}");
+                }
             } else {
                 $this->warn("⚠️ Source file not found: {$sourcePath}");
             }

@@ -36,15 +36,28 @@ class PageCommand extends Command
 
         foreach ($pageFiles as $source => $destination) {
             $sourcePath = __DIR__ . '/../stubs/' . $source;
+            $this->info("DEBUG: Copying from $sourcePath to $destination");
 
             if (file_exists($sourcePath)) {
                 // Ensure destination directory exists
                 $destinationDir = dirname($destination);
-                File::ensureDirectoryExists($destinationDir);
+                try {
+                    File::ensureDirectoryExists($destinationDir);
+                } catch (\Exception $e) {
+                    $this->error("❌ Failed to create directory: {$destinationDir}. Error: {$e->getMessage()}");
+                    continue;
+                }
 
-                // Copy the file
-                File::copy($sourcePath, $destination);
-                $this->info("✅ Published: {$destination}");
+                // Try to copy and overwrite
+                try {
+                    if (file_exists($destination)) {
+                        File::delete($destination);
+                    }
+                    File::copy($sourcePath, $destination);
+                    $this->info("✅ Published: {$destination}");
+                } catch (\Exception $e) {
+                    $this->error("❌ Failed to copy {$sourcePath} to {$destination}. Error: {$e->getMessage()}");
+                }
             } else {
                 $this->warn("⚠️ Source file not found: {$sourcePath}");
             }
