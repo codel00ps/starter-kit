@@ -43,18 +43,8 @@ class BlogCommand extends Command
             if (file_exists($sourcePath)) {
                 $destinationDir = dirname($destination);
                 File::ensureDirectoryExists($destinationDir);
-                
-                // Try to copy and overwrite
-                try {
-                    if (file_exists($destination)) {
-                        // Remove the existing file before copying
-                        File::delete($destination);
-                    }
-                    File::copy($sourcePath, $destination);
-                    $this->info("✅ Published: {$destination}");
-                } catch (\Exception $e) {
-                    $this->error("❌ Failed to copy {$sourcePath} to {$destination}. Error: {$e->getMessage()}");
-                }
+                File::copy($sourcePath, $destination);
+                $this->info("✅ Published: {$destination}");
             } else {
                 $this->warn("⚠️ Source file not found: {$sourcePath}");
             }
@@ -69,24 +59,5 @@ class BlogCommand extends Command
     protected function databasePath(string $path = ''): string
     {
         return database_path($path);
-    }
-
-    public function isBlogInstalled(): bool
-    {
-        $postModelPath = $this->appPath('Models/Post.php');
-        $categoryModelPath = $this->appPath('Models/Category.php');
-        $postNovaPath = $this->appPath('Nova/Post.php');
-        $categoryNovaPath = $this->appPath('Nova/Category.php');
-        $postPolicyPath = $this->appPath('Policies/PostPolicy.php');
-        $categoryPolicyPath = $this->appPath('Policies/CategoryPolicy.php');
-        
-        $postModelExists = file_exists($postModelPath);
-        $categoryModelExists = file_exists($categoryModelPath);
-        $postNovaExists = file_exists($postNovaPath);
-        $categoryNovaExists = file_exists($categoryNovaPath);
-        $postPolicyExists = file_exists($postPolicyPath);
-        $categoryPolicyExists = file_exists($categoryPolicyPath);
-        
-        return $postModelExists || $categoryModelExists || $postNovaExists || $categoryNovaExists || $postPolicyExists || $categoryPolicyExists;
     }
 }
