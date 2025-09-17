@@ -72,21 +72,6 @@ class StarterWizardCommand extends Command
             }
         }
 
-        // // Install page if selected
-        // $pagesInstalled = false;
-        // if (!empty($selected)) {  // If anything is selected, assume Page was chosen
-        //     // Check if pages are already installed
-        //     $pageCommand = new \Codeloops\StarterKit\Console\PageCommand();
-        //     $pagesInstalled = $pageCommand->isPagesInstalled();
-            
-        //     if ($pagesInstalled) {
-        //         $this->info('✔ Page features already installed.');
-        //     } else {
-        //         $this->info('📦 Installing page features...');
-        //         $this->call('starter:page');
-        //     }
-        // }
-
         $this->info('✅ All selected features installed!');
         $this->newLine();
         $this->info('Next steps:');

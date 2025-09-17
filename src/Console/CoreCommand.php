@@ -116,13 +116,12 @@ class CoreCommand extends Command
         try {
             $this->runArtisanCommand([
                 'vendor:publish',
-                '--provider=Murdercode\\TinymceEditor\\TinymceEditorServiceProvider',
-                '--tag=config',
+                '--provider=Murdercode\\TinymceEditor\\FieldServiceProvider',
                 '--force'
             ]);
             $this->info("✅ Published TinyMCE config file.");
         } catch (\Exception $e) {
-            $this->warn("⚠️ Failed to publish TinyMCE config. You may need to run: php artisan vendor:publish --provider=\"Murdercode\\TinymceEditor\\TinymceEditorServiceProvider\" --tag=config --force");
+            $this->warn("⚠️ Failed to publish TinyMCE config. You may need to run: php artisan vendor:publish --provider=\"Murdercode\\TinymceEditor\\FieldServiceProvider\" --force");
         }
 
         $this->info("✅ Nova TinyMCE Editor setup complete.");
